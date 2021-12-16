@@ -51,12 +51,45 @@ dk = solution.vector[1]
 opt_res = {"nk":nk, "dk":dk, "dP":dP, "Tav":Tav}
 print(opt_res)
 
+# Data visualisation
+
 fig, ax = plt.subplots()
 ax.scatter(pareto[0],pareto[1])
 ax.scatter(opt_res["dP"],opt_res["Tav"])
 
 ax.set(xlabel='Pressure(Pa)', ylabel='Temperature (°C)',
-       title='Pareto front and optimal solution')
+        title='Pareto front and optimal solution')
 ax.grid()
 ax.legend(["Pareto front","Optimal solution"])
 
+
+fig, (ax1, ax2) = plt.subplots(1, 2)
+fig.suptitle("Optimization results")
+
+dk_res_T = res.goal_on_parameter("dk","Tav")
+dk_res_P = res.goal_on_parameter("dk","dP")
+
+nk_res_T = res.goal_on_parameter("nk","Tav")
+nk_res_P = res.goal_on_parameter("nk","dP")
+
+ax1.set(xlabel='dk (m)', ylabel='Temperature (°C)',
+        title='Solutions for duct diameter dk')
+ax1.grid()
+
+ax1.scatter(dk_res_T[0],dk_res_T[1], c = "k")
+ax11 = ax1.twinx()
+ax11.set(ylabel='Pressure (Pa)')
+ax11.scatter(dk_res_P[0],dk_res_P[1])
+
+ax11.legend(["Pressure (Pa)"], loc = "upper left")
+ax1.legend(["Temperature (°C)"], loc = "upper right")
+
+ax2.scatter(nk_res_T[0],nk_res_T[1], c = "k")
+ax2.set(xlabel='nk (-)', ylabel='Temperature (°C)',
+        title='Solutions for duct number nk')
+ax2.grid()
+ax22 = ax2.twinx()
+ax22.set( ylabel='Pressure (Pa)')
+ax22.scatter(nk_res_P[0],nk_res_P[1])
+ax22.legend(["Pressure (Pa)"], loc = "upper left")
+ax2.legend(["Temperature (°C)"], loc = "upper right")
