@@ -106,24 +106,6 @@ class TempCalc():
 
         return alfa_duct
  
-    
-# def check_geom(nk, dk, Ds, D1, D2):
-#     duct_gap = 0.005
-#     D1_gap = 0.003
-#     D2_gap = 0.003
-    
-#     hj = (D2 - D1) / 2
-    
-#     const_gap = nk*(dk + duct_gap)/np.pi
-#     const_D = dk + D1_gap + D2_gap
-    
-#     if (const_gap) <= Ds and const_D <= hj:
-#         return True
-    
-#     else:
-#         return False
-            
-
 def calc(nk, dk, Ds):
     
     par = Param(nk, dk, 0.297, 0.4, 0.23, 0.3, 30, 325, 16, 29)
@@ -188,40 +170,9 @@ def calc(nk, dk, Ds):
 
     return [Dp, T_av, S_stator]
 
-
-def set_boundary():
-
-    dk_min = float(input("lower boundary for duct diameter(m):"))
-    dk_max = float(input("upper boundary for duct diamater(m):"))
-    dk_stp = float(input("step for duct diamater:"))
-    dn_min = float(input("lower boundary for duct quantity:"))
-    dn_max = float(input("upper boundary for duct quantity:"))
-    dn_stp = float(input("step for duct quantity:"))
-
-    return (dk_min, dk_max, dk_stp, dn_min, dn_max, dn_stp)
-
-
 if __name__ == "__main__":
 
-    # bound = set_boundary()
 
-    # SP_dk = np.arange(bound[0], bound[1], bound[2]).tolist()
-    # SP_nk = np.arange(bound[3], bound[4], bound[5]).tolist()
-
-    # res_dP = []
-    # res_Tav = []
-    # res_sp_dk = []
-    # res_sp_nk = []
-
-    # for sp_nk in SP_nk:
-    #     for sp_dk in SP_dk:
-    #         res_sp_nk.append(sp_nk)
-    #         res_sp_dk.append(sp_dk)
-    #         res_dP.append(calc(sp_nk, sp_dk)[0])
-    #         res_Tav.append(calc(sp_nk, sp_dk)[1])
-
-    # df = pd.DataFrame({"dk": res_sp_dk, "nk": res_sp_nk,
-    #                   "dP": res_dP, "Tav": res_Tav})
     # df.to_csv("data.csv")
     x = calc(10.001,0.35)
     print(x)
